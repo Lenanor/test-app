@@ -27,6 +27,7 @@ export default class App extends React.Component {
         <View style={styles.icRow}>
           <View style={styles.ic2}>
             <Text>Text 2</Text>
+            <Text>En liten text om ingenting</Text>
           </View>
           <View style={styles.ic3}>
             <Text style={{ color: "#fff", fontWeight: "bold" }}>Text 3</Text>
