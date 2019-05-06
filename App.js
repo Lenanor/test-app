@@ -5,8 +5,11 @@ import {
   Text,
   View,
   Button,
-  TextInput
+  TextInput,
+  Image
 } from "react-native";
+
+import Greetings from "./components/Greetings";
 
 export default class App extends React.Component {
   render() {
@@ -14,15 +17,27 @@ export default class App extends React.Component {
       <View style={styles.container}>
         <StatusBar
           hidden={false}
-          barStyle={"light-content"}
+          barStyle={"dark-content"}
           networkActivityIndicatorVisible={true}
         />
-        <View>
-          <TextInput keyboardType="number-pad" maxLength={3} />
+        <View style={styles.icon}>
+          <Image
+            source={require("./assets/icon_test.png")}
+            style={{ width: 50, height: 50 }}
+          />
         </View>
 
-        <View style={styles.ic1}>
-          <Blink text="Look Look Look!" />
+        <View style={{ padding: 10 }}>
+          <TextInput
+            style={{ height: 40 }}
+            placeholder="Type here to translate!"
+          />
+          <Text style={{ padding: 10, fontSize: 42 }}>
+            {this.state.text
+              .split(" ")
+              .map(word => word && "🍕")
+              .join(" ")}
+          </Text>
         </View>
         <View style={styles.icRow}>
           <View style={styles.ic2}>
@@ -46,49 +61,20 @@ export default class App extends React.Component {
   }
 }
 
-class Greetings extends React.Component {
-  render() {
-    return (
-      <View>
-        <Text style={{ color: "blue", fontWeight: "bold" }}>
-          Hello, {this.props.name}!
-        </Text>
-      </View>
-    );
-  }
-}
-
-class Blink extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { isShowingText: true };
-
-    // Toggle the state every second
-    setInterval(
-      () =>
-        this.setState(previousState => ({
-          isShowingText: !previousState.isShowingText
-        })),
-      1000
-    );
-  }
-
-  render() {
-    if (!this.state.isShowingText) {
-      return null;
-    }
-
-    return <Text>{this.props.text}</Text>;
-  }
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "stretch",
-    backgroundColor: "#0f33fb"
+    backgroundColor: "#fff"
+  },
+  icon: {
+    backgroundColor: "#eee",
+    padding: 40,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
   },
   ic1: {
     backgroundColor: "#eee",
